@@ -32,10 +32,26 @@ public class ProductController {
     public ResponseEntity<Product> createProduct(@RequestBody @Valid ProductRequest productRequest) {
 
         Integer productId = productService.createProduct(productRequest);
-
         Product product = productService.getProductById(productId);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
+
+    }
+
+    @PutMapping("/products/{productId}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Integer productId,
+                                                 @RequestBody @Valid ProductRequest productRequest) {
+        // 先查詢看該商品是否存在
+        Product product = productService.getProductById(productId);
+        if (product == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        // 有查到才開始修改商品數據
+        productService.updateProduct(productId, productRequest);
+        // 改完之後查詢出來回傳
+        Product updatedProduct = productService.getProductById(productId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
 
     }
 
