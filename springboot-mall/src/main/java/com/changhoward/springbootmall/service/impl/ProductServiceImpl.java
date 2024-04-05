@@ -1,7 +1,7 @@
 package com.changhoward.springbootmall.service.impl;
 
-import com.changhoward.springbootmall.constant.ProductCategory;
 import com.changhoward.springbootmall.dao.ProductDao;
+import com.changhoward.springbootmall.dto.ProductQueryParams;
 import com.changhoward.springbootmall.dto.ProductRequest;
 import com.changhoward.springbootmall.model.Product;
 import com.changhoward.springbootmall.service.ProductService;
@@ -17,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     ProductDao productDao;
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
-        return productDao.getProducts(category, search);
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        return productDao.getProducts(productQueryParams);
     }
 
     @Override
