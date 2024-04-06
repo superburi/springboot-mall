@@ -27,8 +27,8 @@ public class ProductController {
     @GetMapping("/products")
     public ResponseEntity<Page<Product>> getProducts(
             // 查詢條件 Filtering
-            @RequestParam(required = false) ProductCategory category,
-            @RequestParam(required = false) String search,
+            @RequestParam(required = false) ProductCategory category, // 用類別找商品
+            @RequestParam(required = false) String search, // 模糊查詢
 
             // 排序 Sorting
             @RequestParam(defaultValue = "created_date") String orderBy,
