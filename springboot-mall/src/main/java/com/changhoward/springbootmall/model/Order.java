@@ -14,6 +14,8 @@ public class Order {
     // 因為一筆訂單包含 1 至多個 orderItem ，所以把所有 orderItem 放進 List ，再把 List 放進 order 裡面一起回傳
     private List<OrderItem> orderItemList;
 
+
+
     public Integer getOrderId() {
         return orderId;
     }

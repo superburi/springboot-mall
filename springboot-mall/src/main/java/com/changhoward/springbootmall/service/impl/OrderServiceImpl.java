@@ -5,6 +5,7 @@ import com.changhoward.springbootmall.dao.ProductDao;
 import com.changhoward.springbootmall.dao.UserDao;
 import com.changhoward.springbootmall.dto.BuyItem;
 import com.changhoward.springbootmall.dto.CreateOrderRequest;
+import com.changhoward.springbootmall.dto.OrderQueryParams;
 import com.changhoward.springbootmall.model.Order;
 import com.changhoward.springbootmall.model.OrderItem;
 import com.changhoward.springbootmall.model.Product;
@@ -34,6 +35,33 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private UserDao userDao;
+
+    @Override
+    public Integer countOrder(OrderQueryParams orderQueryParams) {
+        return orderDao.countOrder(orderQueryParams);
+    }
+
+    @Override
+    public List<Order> getOrders(OrderQueryParams orderQueryParams) {
+
+        // 用前端送來的參數去取得該使用者的 orderList
+        List<Order> orderList = orderDao.getOrders(orderQueryParams);
+
+        // 讓 orderList 跑迴圈
+        for (Order order : orderList) {
+
+            // 用 orderList 裡面每一筆 order 去取得該筆 order 中所有 orderItem，然後裝在 List 裡面
+            List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(order.getOrderId());
+            // 把裝有該筆 order 的 orderItems 的 List ，放進 order 物件裡面
+            order.setOrderItemList(orderItemList);
+
+        }
+
+        // 到這裡時，orderList 裡面的每一個 order ，裡面都已經包含那一筆 order 的 orderItems 了
+        // 把裝著完整資訊的 orderList 回傳
+        return orderList;
+
+    }
 
     @Override
     public Order getOrderById(Integer orderId) {
