@@ -4,6 +4,7 @@ import com.changhoward.springbootmall.dao.OrderDao;
 import com.changhoward.springbootmall.dao.ProductDao;
 import com.changhoward.springbootmall.dto.BuyItem;
 import com.changhoward.springbootmall.dto.CreateOrderRequest;
+import com.changhoward.springbootmall.model.Order;
 import com.changhoward.springbootmall.model.OrderItem;
 import com.changhoward.springbootmall.model.Product;
 import com.changhoward.springbootmall.service.OrderService;
@@ -22,6 +23,21 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProductDao productDao;
+
+    @Override
+    public Order getOrderById(Integer orderId) {
+
+        // 取得訂單資訊
+        Order order = orderDao.getOrderById(orderId);
+
+        // 取得訂單明細資訊
+        // 因為一張訂單會包含一個orderItemList(裡面是 1 至多個 orderItem)，所以有在 Order 裡面新增過欄位了
+        List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(orderId);
+        order.setOrderItemList(orderItemList);
+
+        return order;
+
+    }
 
     @Transactional
     @Override
