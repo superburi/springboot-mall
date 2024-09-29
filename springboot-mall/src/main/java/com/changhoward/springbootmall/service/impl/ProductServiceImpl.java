@@ -14,7 +14,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    ProductDao productDao;
+    private ProductDao productDao;
 
     @Override
     public Integer countProduct(ProductQueryParams productQueryParams) {

@@ -83,8 +83,8 @@ public class ProductDaoImpl implements ProductDao {
             還可以回傳一個null，可以去做後續處理，而不是噴exception讓程式
             中止。
         */
-        if (productList.size() > 0) {
-            return productList.get(0);
+        if ( productList.size() > 0 ) {
+            return productList.get( 0 );
         } else {
             return null;
         }
