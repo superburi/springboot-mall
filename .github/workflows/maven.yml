@@ -10,7 +10,7 @@ name: my first automatic build&test for SpringBoot-mall
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "order" ]
   pull_request:
     branches: [ "main" ]
 
