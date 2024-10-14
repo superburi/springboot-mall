@@ -8,12 +8,16 @@
 
 name: my first automatic build&test for SpringBoot-mall
 
+# on -> 會在何時觸發此 yml 定義的工作流，此處設定為每當 push 到 main 或 order 分支時，或是有 pull request 要求 merge 到 main 時
 on:
   push:
     branches: [ "main", "order" ]
   pull_request:
     branches: [ "main" ]
 
+# jobs -> 觸發工作流時，實際上需要做什麼，build 為工作大項， steps 為 build 裡的具體步驟，runs-on 表示程式要運行在 Github Actions
+# 雲端空間的虛擬機上，而此處設定虛擬機作業系統為最新版本的 ubuntu．
+# - name 是具體步驟的名字，run 是拿來運行指令．
 jobs:
   build:
 
