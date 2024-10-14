@@ -1,4 +1,7 @@
 -- product
+DELETE FROM product;
+ALTER TABLE product ALTER COLUMN product_id RESTART WITH 1;
+
 INSERT INTO product (product_name, category, image_url, price, stock, description, created_date, last_modified_date) VALUES ('蘋果（澳洲）', 'FOOD', 'https://cdn.pixabay.com/photo/2016/11/30/15/00/apples-1872997_1280.jpg', 30, 10, '這是來自澳洲的蘋果！', '2022-03-19 17:00:00', '2022-03-22 18:00:00');
 INSERT INTO product (product_name, category, image_url, price, stock, description, created_date, last_modified_date) VALUES ('蘋果（日本北海道）', 'FOOD', 'https://cdn.pixabay.com/photo/2017/09/26/13/42/apple-2788662_1280.jpg', 300, 5, '這是來自日本北海道的蘋果！', '2022-03-19 18:30:00', '2022-03-19 18:30:00');
 INSERT INTO product (product_name, category, image_url, price, stock, description, created_date, last_modified_date) VALUES ('好吃又鮮甜的蘋果橘子', 'FOOD', 'https://cdn.pixabay.com/photo/2021/07/30/04/17/orange-6508617_1280.jpg', 10, 50, null, '2022-03-20 09:00:00', '2022-03-24 15:00:00');
@@ -9,10 +12,18 @@ INSERT INTO product (product_name, category, image_url, price, stock, descriptio
 
 
 -- user
+DELETE FROM users;
+ALTER TABLE users ALTER COLUMN user_id RESTART WITH 1;
+
 INSERT INTO users (email, password, created_date, last_modified_date) VALUES ('user1@gmail.com', '202cb962ac59075b964b07152d234b70', '2022-06-30 10:30:00', '2022-06-30 10:30:00');
 INSERT INTO users (email, password, created_date, last_modified_date) VALUES ('user2@gmail.com', '202cb962ac59075b964b07152d234b70', '2022-06-30 10:40:00', '2022-06-30 10:40:00');
 
 -- order, order_item
+DELETE FROM `order`;
+ALTER TABLE `order` ALTER COLUMN order_id RESTART WITH 1;
+DELETE FROM order_item;
+ALTER TABLE order_item ALTER COLUMN order_item_id RESTART WITH 1;
+
 INSERT INTO `order` (user_id, total_amount, created_date, last_modified_date) VALUES (1, 500690, '2022-06-30 11:10:00', '2022-06-30 11:10:00');
 INSERT INTO order_item (order_id, product_id, quantity, amount) VALUES (1, 1, 3, 90);
 INSERT INTO order_item (order_id, product_id, quantity, amount) VALUES (1, 2, 2, 600);
